@@ -1,0 +1,19 @@
+{
+  "name": "pipeworx",
+  "version": "0.1.0",
+  "description": "Connect Cursor to 1,423+ live data tools across 392+ packs (SEC, FDA, FRED, Census, EPA, USPTO patents, weather, real estate, and more) via the Pipeworx MCP gateway.",
+  "author": {
+    "name": "Pipeworx",
+    "url": "https://pipeworx.io"
+  },
+  "license": "MIT",
+  "homepage": "https://pipeworx.io",
+  "repository": "https://github.com/pipeworx-io/cursor-plugin",
+  "keywords": [
+    "mcp",
+    "cursor-plugin",
+    "data",
+    "pipeworx",
+    "gateway"
+  ]
+}
