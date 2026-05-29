@@ -1,6 +1,6 @@
 # Pipeworx Cursor Plugin
 
-Connect Cursor to live data from **2,761 tools across 605 packs** — SEC filings, USPTO patents, FRED economic data, FDA drug data, Census, EPA, ATTOM real estate, weather, and 597+ more.
+Connect Cursor to live data from **2,825 tools across 621 packs** — SEC filings, USPTO patents, FRED economic data, FDA drug data, Census, EPA, ATTOM real estate, weather, and 613+ more.
 
 Backed by the [Pipeworx](https://pipeworx.io) MCP gateway at `gateway.pipeworx.io`.
 
@@ -20,7 +20,7 @@ cursor://anysphere.cursor-deeplink/plugin/install?name=pipeworx
 
 ## How it works
 
-The plugin loads **17 meta-tools** from the Pipeworx gateway — not all 2,761 underlying tools. That's deliberate: dumping every tool definition into the context window burns tokens you'll never use (the "context tax", which matters more in Cursor than other clients because Cursor re-sends every tool definition on every turn).
+The plugin loads **17 meta-tools** from the Pipeworx gateway — not all 2,825 underlying tools. That's deliberate: dumping every tool definition into the context window burns tokens you'll never use (the "context tax", which matters more in Cursor than other clients because Cursor re-sends every tool definition on every turn).
 
 Instead, Cursor reaches for `ask_pipeworx` or `discover_tools` and the gateway routes the request to the right pack at session time. You get the full catalog without paying for it up front.
 
