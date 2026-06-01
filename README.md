@@ -1,8 +1,6 @@
-# Pipeworx Cursor Plugin
+# Pipeworx for Cursor
 
-Connect Cursor to live data from **2,935 tools across 649 packs** — SEC filings, USPTO patents, FRED economic data, FDA drug data, Census, EPA, ATTOM real estate, weather, and 641+ more.
-
-Backed by the [Pipeworx](https://pipeworx.io) MCP gateway at `gateway.pipeworx.io`.
+Give Cursor one MCP that reaches **2,972 live-data tools across 650 sources** — SEC filings, USPTO patents, FRED, Census, FDA, EPA, USAspending, Polymarket, Zillow, weather, and 640+ more — without loading 2,972 tool schemas into your context window every turn.
 
 ## Install
 
@@ -18,34 +16,49 @@ Or one-click via deeplink:
 cursor://anysphere.cursor-deeplink/plugin/install?name=pipeworx
 ```
 
-## How it works
+## Try it
 
-The plugin loads **17 meta-tools** from the Pipeworx gateway — not all 2,935 underlying tools. That's deliberate: dumping every tool definition into the context window burns tokens you'll never use (the "context tax", which matters more in Cursor than other clients because Cursor re-sends every tool definition on every turn).
+After install, ask Cursor things like:
 
-Instead, Cursor reaches for `ask_pipeworx` or `discover_tools` and the gateway routes the request to the right pack at session time. You get the full catalog without paying for it up front.
+| Ask | What it triggers |
+|---|---|
+| *"What just happened to Apple?"* | `sec_8k_recent` → SEC 8-K events classified by severity |
+| *"Spread between Polymarket and Kalshi on the next Fed decision?"* | `polymarket_kalshi_spread` → live cross-venue mispricing |
+| *"Overdue Phase 3 readouts at Moderna?"* | `pharma_pipeline_catalysts` → biotech catalyst calendar |
+| *"DoD cybersecurity contracts this week?"* | `usa_award_search` → sub-second USAspending mirror |
+| *"Median home value and renter share in Lubbock, TX?"* | `housing_market_snapshot` + `housing_metro_demand` |
+| *"Unemployment rate last month?"* | `fred_get_series` → official FRED data |
 
-The loaded meta-tools:
+Cursor picks the right tool via `ask_pipeworx` — no pack-name memorization required.
 
-- **`ask_pipeworx`** — natural-language router. *"What's Apple's latest 10-K?"* hits SEC EDGAR. *"Side effects of Ozempic?"* hits FDA.
-- **`discover_tools`** — top-20 most relevant tools for a task, with full schemas.
-- **`entity_profile`**, **`recent_changes`**, **`compare_entities`**, **`resolve_entity`** — fan-out across multiple packs in one call.
-- **`validate_claim`** — fact-check claims against SEC XBRL. Returns a verdict + citation.
-- **`remember`** / **`recall`** / **`forget`** — persistent memory across sessions.
-- **`list_packs`**, **`search_packs`**, **`get_pack_tools`**, **`get_connection_config`**, **`get_platform_status`**, **`search_mcp_directory`** — browse the catalog.
+## How it loads light
 
-The bundled skill + always-on rule teach Cursor when to reach for each.
+The plugin exposes **17 meta-tools**, not 2,972 — `ask_pipeworx({question})` and friends route at runtime. This matters double in Cursor because Cursor re-sends every tool definition on every turn; a 2,972-tool dump would dominate the context budget.
+
+## Free tier + signup
+
+100 calls/day anonymous, IP-bound. [Sign up free in 10s via GitHub](https://pipeworx.io/signup?via=cursor_plugin) for 2,000/day + a stable account.
 
 ## Verify after install
 
-In Cursor, open the MCP settings panel — `pipeworx` should show a green dot with ~17 tools. Then try a real query in the chat:
+Open the MCP settings panel — `pipeworx` should show a green dot with ~17 tools. Then try in chat:
 
 > What was the unemployment rate last month?
 
-Cursor should call `ask_pipeworx` (which routes to `fred_get_series`) and return a real number.
+## What's loaded
 
-## Need direct pack access?
+- **`ask_pipeworx`** — natural-language router across all 650 packs.
+- **`discover_tools`** — top-20 relevant tools for a task, with full schemas.
+- **`entity_profile`** / **`compare_entities`** / **`recent_changes`** / **`resolve_entity`** — fan-out across multiple packs in one call.
+- **`validate_claim`** — fact-check claims against SEC XBRL.
+- **`remember`** / **`recall`** / **`forget`** — persistent memory across sessions.
+- **`list_packs`** / **`search_packs`** / **`get_pack_tools`** / **`get_connection_config`** / **`get_platform_status`** / **`search_mcp_directory`** — browse the catalog.
 
-If you want a specific pack's tools loaded directly (e.g., to call `attom_property_search` without going through `ask_pipeworx`), add a scoped entry to your project's `.cursor/mcp.json`:
+The bundled skill + always-on rule teach Cursor when to reach for each.
+
+## Direct pack access
+
+For a specific pack's tools loaded directly (e.g., `attom_property_search` without going through `ask_pipeworx`), add a scoped entry to your project's `.cursor/mcp.json`:
 
 ```json
 {
@@ -57,11 +70,11 @@ If you want a specific pack's tools loaded directly (e.g., to call `attom_proper
 }
 ```
 
-Or a vertical bundle (e.g., `?vertical=housing` for the housing data stack).
+Or a vertical bundle (e.g., `?vertical=housing` for the housing-data stack).
 
-## Higher rate limits
+## Bring your own key
 
-The plugin runs on the anonymous tier (50 calls/day per IP). For higher limits (500/day BYO, 2,000/day OAuth, or unlimited paid), [sign up at pipeworx.io](https://pipeworx.io) and add an `X-API-Key` header in your `mcp.json`:
+For BYO-tier limits (500/day) or to attach your own per-tool API keys, add an `X-API-Key` header in `mcp.json`:
 
 ```json
 {
@@ -77,9 +90,13 @@ The plugin runs on the anonymous tier (50 calls/day per IP). For higher limits (
 ## Links
 
 - Gateway: https://gateway.pipeworx.io
-- Stack guide: https://pipeworx.io/stack
+- Status: https://pipeworx.io/status
 - Source: https://github.com/pipeworx-io/pipeworx
 
 ## License
 
 MIT
+
+---
+
+⭐ Star if you'd use this — helps other Cursor users discover it.
