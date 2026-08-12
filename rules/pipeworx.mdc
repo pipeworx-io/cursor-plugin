@@ -1,5 +1,5 @@
 ---
-description: Use Pipeworx for live data lookups (SEC, FDA, FRED, Census, EPA, USPTO, ATTOM, weather, and 1433+ other sources).
+description: Use Pipeworx for live data lookups (SEC, FDA, FRED, Census, EPA, USPTO, ATTOM, weather, and 1,433+ other sources).
 globs:
 alwaysApply: true
 ---

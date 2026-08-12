@@ -1,6 +1,6 @@
 # Pipeworx for Cursor
 
-Give Cursor one MCP that reaches **5,501+ live-data tools across 1,441+ sources** — SEC filings, USPTO patents, FRED, Census, FDA, EPA, USAspending, Polymarket, Zillow, weather, and 1433+ more — without loading 5,000+ tool schemas into your context window every turn.
+Give Cursor one MCP that reaches **5,501+ live-data tools across 1,441+ sources** — SEC filings, USPTO patents, FRED, Census, FDA, EPA, USAspending, Polymarket, Zillow, weather, and 1,433+ more — without loading 5,501+ tool schemas into your context window every turn.
 
 ## Install
 
@@ -33,7 +33,7 @@ Cursor picks the right tool via `ask_pipeworx` — no pack-name memorization req
 
 ## How it loads light
 
-The plugin exposes **~26 meta-tools**, not all 5,000+ — `ask_pipeworx({question})` and friends route at runtime. This matters double in Cursor because Cursor re-sends every tool definition on every turn; a 5,000+-tool dump would dominate the context budget.
+The plugin exposes **~31 meta-tools**, not all 5,501+ — `ask_pipeworx({question})` and friends route at runtime. This matters double in Cursor because Cursor re-sends every tool definition on every turn; a 5,501+-tool dump would dominate the context budget.
 
 ## Free tier + signup
 
