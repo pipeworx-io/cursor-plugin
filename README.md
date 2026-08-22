@@ -1,6 +1,6 @@
 # Pipeworx for Cursor
 
-Give Cursor one MCP that reaches **5,501+ live-data tools across 1,441+ sources** — SEC filings, USPTO patents, FRED, Census, FDA, EPA, USAspending, Polymarket, Zillow, weather, and 1,433+ more — without loading 5,501+ tool schemas into your context window every turn.
+Give Cursor one MCP that reaches **5,581+ live-data tools across 1,463+ sources** — SEC filings, USPTO patents, FRED, Census, FDA, EPA, USAspending, Polymarket, Zillow, weather, and 1,455+ more — without loading 5,581+ tool schemas into your context window every turn.
 
 ## Install
 
@@ -33,7 +33,7 @@ Cursor picks the right tool via `ask_pipeworx` — no pack-name memorization req
 
 ## How it loads light
 
-The plugin exposes **~31 meta-tools**, not all 5,501+ — `ask_pipeworx({question})` and friends route at runtime. This matters double in Cursor because Cursor re-sends every tool definition on every turn; a 5,501+-tool dump would dominate the context budget.
+The plugin exposes **~31 meta-tools**, not all 5,581+ — `ask_pipeworx({question})` and friends route at runtime. This matters double in Cursor because Cursor re-sends every tool definition on every turn; a 5,581+-tool dump would dominate the context budget.
 
 ## Free tier + signup
 
@@ -41,13 +41,13 @@ The plugin exposes **~31 meta-tools**, not all 5,501+ — `ask_pipeworx({questio
 
 ## Verify after install
 
-Open the MCP settings panel — `pipeworx` should show a green dot with ~26 tools. Then try in chat:
+Open the MCP settings panel — `pipeworx` should show a green dot with ~38 tools. Then try in chat:
 
 > What was the unemployment rate last month?
 
 ## What's loaded
 
-- **`ask_pipeworx`** — natural-language router across all 1,441+ sources.
+- **`ask_pipeworx`** — natural-language router across all 1,463+ sources.
 - **`discover_tools`** — top-20 relevant tools for a task, with full schemas.
 - **`entity_profile`** / **`compare_entities`** / **`recent_changes`** / **`resolve_entity`** — fan-out across multiple packs in one call.
 - **`validate_claim`** — fact-check claims against SEC XBRL.
@@ -86,6 +86,13 @@ For BYO-tier limits (200/day) or to attach your own per-tool API keys, add an `X
   }
 }
 ```
+
+**No key? Sign in instead — it is free and gets you the same 200 calls/day.**
+Use `https://gateway.pipeworx.io/oauth/mcp` as the `url` with no `headers` block,
+and complete the GitHub sign-in when Cursor prompts. Keep the anonymous URL
+(`.../pipeworx-catalog/mcp`, no headers) if you want no account at all — that is
+50 calls/day. Note the two are alternatives: an `X-API-Key` sent to the OAuth URL
+is rejected, because that endpoint authenticates with a bearer token.
 
 ## Links
 
